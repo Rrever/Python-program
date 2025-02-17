@@ -1,0 +1,31 @@
+
+from datetime import datetime
+
+def calculate_age(birthdate):
+    now = datetime.now()
+    age_in_seconds = (now - birthdate).total_seconds()
+
+    years = age_in_seconds // (365.25 * 24 * 3600)
+    age_in_seconds %= (365.25 * 24 * 3600)
+    months = age_in_seconds // (30.44 * 24 * 3600)
+    age_in_seconds %= (30.44 * 24 * 3600)
+    days = age_in_seconds // (24 * 3600)
+    age_in_seconds %= (24 * 3600)
+    hours = age_in_seconds // 3600
+    age_in_seconds %= 3600
+    minutes = age_in_seconds // 60
+    age_in_seconds %= 60
+    seconds = age_in_seconds
+
+    return int(years), int(months), int(days), int(hours), int(minutes), int(seconds)
+
+def main():
+    birthdate_input = input("Enter your birthdate (YYYY-MM-DD HH:MM:SS): ")
+    birthdate = datetime.strptime(birthdate_input, "%Y-%m-%d %H:%M:%S")
+
+    years, months, days, hours, minutes, seconds = calculate_age(birthdate)
+
+    print(f"Age: {years} years, {months} months, {days} days, {hours} hours, {minutes} minutes, {seconds} seconds")
+
+if __name__ == "__main__":
+    main()
